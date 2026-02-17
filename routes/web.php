@@ -231,6 +231,10 @@ Route::get('/task4/six', [task4Controller::class, 'six']);
 
 // Практика 6
 
-// Задание 2
+Route::prefix('task6')->group(function () {
 
-Route::get('/task2', [task6Controller::class, 'task2']);
+    // Задание 1-
+    Route::get('/show', [UserController::class, 'show']);
+
+
+});
