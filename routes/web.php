@@ -233,8 +233,62 @@ Route::get('/task4/six', [task4Controller::class, 'six']);
 
 Route::prefix('task6')->group(function () {
 
-    // Задание 1-
+    // Задание 1- (Построитель запросов)
     Route::get('/show', [UserController::class, 'show']);
 
+});
+
+// Практика 7 - Модели
+Route::prefix('task7')->group(function () {
+
+    // Задание 4-6
+    Route::get('/index', [UserController::class, 'index']);
+
+    // Задание 7
+    Route::get('/task7', [UserController::class, 'task7']);
+
+    // Задание 8
+    Route::get('/task8', [UserController::class, 'task8']);
+
+    // Задание 9
+    Route::get('/task9', [UserController::class, 'task9']);
+
+    // Задание 10
+    Route::get('/task10', [UserController::class, 'task10']);
+
+    // Задание 11
+    Route::get('/task11', [UserController::class, 'task11']);
+
+    // Задание 12
+    Route::get('/task12', [UserController::class, 'task12']);
+
+    // Задание 13
+    Route::get('/task13', [UserController::class, 'task13']);
+
+    // Задание 14
+    Route::get('/task14', [UserController::class, 'task14']);
+
+    // Задание 15
+    Route::get('/task15', [UserController::class, 'task15']);
+
+    // Задание 16
+    Route::get('/task16', [UserController::class, 'task16']);
+
+    // Задание 17
+    Route::get('/task17', [UserController::class, 'task17']);
+
+    // Задание 18
+    Route::get('/task18', [UserController::class, 'task18']);
+
+    // Задание 19
+    Route::get('/task19', [UserController::class, 'task19']);
+
+    // Задания для самостоятельной работы
+    Route::get('/product-crud', [UserController::class, 'productCrud']);
+    Route::get('/filtering', [UserController::class, 'filtering']);
+    Route::get('/aggregates', [UserController::class, 'aggregates']);
+    Route::get('/scopes', [UserController::class, 'scopes']);
+    Route::get('/casts', [UserController::class, 'castsAndMutators']);
+    Route::get('/create-order', [UserController::class, 'createOrder']);
 
 });

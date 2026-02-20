@@ -1,0 +1,21 @@
+New-Object : Не удается найти перегрузку для "StreamReader" и количества аргументов: "10".
+строка:1 знак:200
++ ... }; $reader = New-Object System.IO.StreamReader($entry.Open()); $conte ...
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [New-Object], MethodException
+    + FullyQualifiedErrorId : ConstructorInvokedThrowException,Microsoft.PowerShell.Commands.NewObjectCommand
+ 
+Невозможно вызвать метод для выражения со значением NULL.
+строка:1 знак:250
++ ... O.StreamReader($entry.Open()); $content = $reader.ReadToEnd(); $reade ...
++                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
+Невозможно вызвать метод для выражения со значением NULL.
+строка:1 знак:282
++ ... ntry.Open()); $content = $reader.ReadToEnd(); $reader.Close(); $zip.D ...
++                                                   ~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
