@@ -12,39 +12,39 @@ use App\Models\Order;
 
 class UserController extends Controller
 {
-    // Задания 4-19
+    // Практика 7 - Задания 4-19
     public function index()
     {
         $result = [];
 
-        // Задание 4-6: Получить всех юзеров
+        // Задания 4-6
         $result['Задание 4-6'] = User::all();
 
-        // Задание 7: Получить всех юзеров с возрастом 30
+        // Задание 7
         $result['Задание 7'] = User::where('age', 30)->get();
 
-        // Задание 8: Получить всех юзеров с зарплатой от 100 до 300
+        // Задание 8
         $result['Задание 8'] = User::whereBetween('salary', [100, 300])->get();
 
-        // Задание 9: Получить всех юзеров, начиная с четвертого
+        // Задание 9
         $result['Задание 9'] = User::skip(3)->get();
 
-        // Задание 10: Получить 5 юзеров, начиная с четвертого
+        // Задание 10
         $result['Задание 10'] = User::skip(3)->take(5)->get();
 
-        // Задание 11: Получить юзеров с id 1, 3, 4, 5
+        // Задание 11
         $result['Задание 11'] = User::whereIn('id', [1, 3, 4, 5])->get();
 
-        // Задание 12: Получить юзера с возрастом 30
+        // Задание 12
         $result['Задание 12'] = User::where('age', 30)->first();
 
-        // Задание 13: Получить юзера с id=3
+        // Задание 13
         $result['Задание 13'] = User::find(3);
 
-        // Задание 14: Получить юзеров с id 3, 4, 5
+        // Задание 14
         $result['Задание 14'] = User::whereIn('id', [3, 4, 5])->get();
 
-        // Задание 15: Добавить нового юзера
+        // Задание 15
         User::create([
             'sex' => 'Мужской',
             'first_name' => 'Иван',
@@ -57,7 +57,7 @@ class UserController extends Controller
         ]);
         $result['Задание 15'] = 'Юзер добавлен';
 
-        // Задание 16: Изменить юзера
+        // Задание 16
         $user = User::find(1);
         if ($user) {
             $user->update(['salary' => 700]);
@@ -66,15 +66,15 @@ class UserController extends Controller
             $result['Задание 16'] = 'Юзер не найден';
         }
 
-        // Задание 17: Удалить юзеров с возрастом > 30
+        // Задание 17
         $deleted = User::where('age', '>', 30)->delete();
         $result['Задание 17'] = 'Удалено юзеров: ' . $deleted;
 
-        // Задание 18: Удалить юзера с id=3
+        // Задание 18
         User::destroy(3);
         $result['Задание 18'] = 'Юзер с id=3 удалён';
 
-        // Задание 19: Удалить юзеров с id 4, 5, 6
+        // Задание 19
         User::destroy([4, 5, 6]);
         $result['Задание 19'] = 'Юзеры с id 4, 5, 6 удалены';
 
@@ -84,24 +84,24 @@ class UserController extends Controller
         return view('task7.index', compact('result', 'users'));
     }
 
-    // Задание 7 (сам. работа) - CRUD
+    // Практика 7 - Задания 7-10 (сам. работа)
     public function productCrud()
     {
         $result = [];
 
-        // Задание 7a: Получение всех товаров
+        // Задание 7a
         $result['7a - Все товары'] = Product::all();
 
-        // Задание 7b: Получение товара по id = 5
+        // Задание 7b
         $result['7b - Товар id=5'] = Product::find(5);
 
-        // Задание 7c: Получение первого товара
+        // Задание 7c
         $result['7c - Первый товар'] = Product::first();
 
-        // Задание 7d: Получение товара по id или исключение
+        // Задание 7d
         $result['7d - Товар id=5 (OrFail)'] = Product::findOrFail(5);
 
-        // Задание 8: Создание товара (2 способа)
+        // Задание 8
         $product1 = new Product();
         $product1->name = 'Товар 1';
         $product1->price = 199.99;
@@ -117,7 +117,7 @@ class UserController extends Controller
         ]);
         $result['8b - Создан товар (create)'] = $product2;
 
-        // Задание 9: Обновление
+        // Задание 9
         $product = Product::find(1);
         if ($product) {
             $product->price = 999.99;
@@ -128,7 +128,7 @@ class UserController extends Controller
         Product::where('quantity', 0)->update(['is_active' => false]);
         $result['9b - Массовое обновление'] = 'Выполнено';
 
-        // Задание 10: Удаление
+        // Задание 10
         $product = Product::find(1);
         if ($product) {
             $product->delete();
@@ -144,34 +144,34 @@ class UserController extends Controller
         return view('task7.index', compact('result'));
     }
 
-    // Задание 11-15 (сам. работа) - Фильтрация
+    // Практика 7 - Задания 11-15 (сам. работа)
     public function filtering()
     {
         $result = [];
 
-        // Задание 11: price > 500 И is_active = true, сортировка
+        // Задание 11
         $result['Задание 11'] = Product::where('price', '>', 500)
             ->where('is_active', true)
             ->orderBy('price', 'desc')
             ->get();
 
-        // Задание 12: title LIKE '%Laravel%' ИЛИ views_count > 1000
+        // Задание 12
         $result['Задание 12'] = Article::where('title', 'like', '%Laravel%')
             ->orWhere('views_count', '>', 1000)
             ->limit(10)
             ->offset(5)
             ->get();
 
-        // Задание 13: whereBetween и whereIn
+        // Задание 13
         $result['Задание 13a - whereBetween'] = Product::whereBetween('price', [100, 500])->get();
         $result['Задание 13b - whereIn'] = Product::whereIn('quantity', [0, 5, 10, 15])->get();
 
-        // Задание 14: whereNotNull + whereDate
+        // Задание 14
         $result['Задание 14'] = Article::whereNotNull('published_at')
             ->whereDate('created_at', today())
             ->get();
 
-        // Задание 15: Группировка условий (closure)
+        // Задание 15
         $result['Задание 15'] = Product::where(function ($query) {
                 $query->where('price', '>', 1000)
                     ->where('quantity', '>', 0);
@@ -182,19 +182,19 @@ class UserController extends Controller
         return view('task7.index', compact('result'));
     }
 
-    // Задание 16-17 (сам. работа) - Агрегатные функции
+    // Практика 7 - Задания 16-17 (сам. работа)
     public function aggregates()
     {
         $result = [];
 
-        // Задание 16: Агрегатные функции
+        // Задание 16
         $result['Задание 16a - count'] = Product::where('is_active', true)->count();
         $result['Задание 16b - avg'] = Product::avg('price');
         $result['Задание 16c - max'] = Product::max('price');
         $result['Задание 16d - min'] = Product::min('price');
         $result['Задание 16e - sum'] = Product::sum('quantity');
 
-        // Задание 17: Группировка
+        // Задание 17
         $result['Задание 17'] = Product::selectRaw('is_active, COUNT(*) as count, AVG(price) as avg_price')
             ->groupBy('is_active')
             ->get();
@@ -202,27 +202,27 @@ class UserController extends Controller
         return view('task7.index', compact('result'));
     }
 
-    // Задание 18-19 (сам. работа) - Scopes
+    // Практика 7 - Задания 18-19 (сам. работа)
     public function scopes()
     {
         $result = [];
 
-        // Задание 18: Локальные scopes
+        // Задание 18
         $result['Задание 18'] = Product::active()->expensive(500)->get();
 
-        // Задание 19: Глобальный scope с отключением
+        // Задание 19
         $result['Задание 19a - с global scope'] = Article::all();
         $result['Задание 19b - без global scope'] = Article::withoutGlobalScope('published')->get();
 
         return view('task7.index', compact('result'));
     }
 
-    // Задание 20-21 (сам. работа) - Casts и мутаторы
+    // Практика 7 - Задания 20-21 (сам. работа)
     public function castsAndMutators()
     {
         $result = [];
 
-        // Задание 20: Casts
+        // Задание 20
         $product = Product::create([
             'name' => 'Тестовый товар',
             'price' => 199.99,
@@ -233,7 +233,7 @@ class UserController extends Controller
         $result['Задание 20 - product'] = $product;
         $result['Задание 20 - options (array)'] = $product->options;
 
-        // Задание 21: Аксессоры и мутаторы
+        // Задание 21
         $article = Article::create([
             'title' => '  <b>laravel tutorial</b>  ',
             'body' => 'Текст статьи',
@@ -243,16 +243,96 @@ class UserController extends Controller
         return view('task7.index', compact('result'));
     }
 
-    // Задание 3 (сам. работа) - Order с UUID
+    // Практика 7 - Задание 3 (сам. работа)
     public function createOrder()
     {
         $result = [];
 
-        // Задание 3: Order с UUID
+        // Задание 3
         $order = Order::create();
         $result['Задание 3 - Order с UUID'] = $order;
         $result['order_id'] = $order->order_id;
 
         return view('task7.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 1
+    public function userArticles()
+    {
+        $result = [];
+        $user = User::with('articles')->find(1);
+        $result['user'] = $user;
+        $result['articles'] = $user?->articles;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 3
+    public function userCity()
+    {
+        $result = [];
+        $user = User::with('city')->find(1);
+        $result['user'] = $user;
+        $result['city'] = $user?->city;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 4
+    public function cityUsers()
+    {
+        $result = [];
+        $city = City::with('users')->find(1);
+        $result['city'] = $city;
+        $result['users'] = $city?->users;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 5
+    public function articleUser()
+    {
+        $result = [];
+        $article = Article::with('user')->find(1);
+        $result['article'] = $article;
+        $result['user'] = $article?->user;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 6
+    public function orderProducts()
+    {
+        $result = [];
+        $order = Order::with('products')->first();
+        $result['order'] = $order;
+        $result['products'] = $order?->products;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 7
+    public function productWarehouses()
+    {
+        $result = [];
+        $product = Product::with('warehouses')->find(1);
+        $result['product'] = $product;
+        $result['warehouses'] = $product?->warehouses;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 8
+    public function orderUser()
+    {
+        $result = [];
+        $order = Order::with('user')->first();
+        $result['order'] = $order;
+        $result['user'] = $order?->user;
+        return view('task8.index', compact('result'));
+    }
+
+    // Практика 8 - Задание 9
+    public function productOrders()
+    {
+        $result = [];
+        $product = Product::with('orders')->find(1);
+        $result['product'] = $product;
+        $result['orders'] = $product?->orders;
+        return view('task8.index', compact('result'));
     }
 }

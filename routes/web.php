@@ -292,3 +292,34 @@ Route::prefix('task7')->group(function () {
     Route::get('/create-order', [UserController::class, 'createOrder']);
 
 });
+
+// Практика 8
+Route::prefix('task8')->group(function () {
+    // Задание 1
+    Route::get('/user-articles', [UserController::class, 'userArticles']);
+
+    // Задание 2
+    Route::get('/user-orders', [UserController::class, 'userOrders']);
+
+    // Задание 3
+    Route::get('/user-city', [UserController::class, 'userCity']);
+
+    // Задание 4
+    Route::get('/city-users', [UserController::class, 'cityUsers']);
+
+    // Задание 5
+    Route::get('/article-user', [UserController::class, 'articleUser']);
+
+    // Задание 6
+    Route::get('/order-products', [UserController::class, 'orderProducts']);
+
+    // Задание 7
+    Route::get('/product-warehouses', [UserController::class, 'productWarehouses']);
+
+    // Задание 8
+    Route::get('/order-user', [UserController::class, 'orderUser']);
+
+    // Задание 9
+    Route::get('/product-orders', [UserController::class, 'productOrders']);
+});
+

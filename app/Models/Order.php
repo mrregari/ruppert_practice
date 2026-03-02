@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+// Практика 7 - Задание 3
 class Order extends Model
 {
     use HasFactory;
@@ -25,5 +26,19 @@ class Order extends Model
                 $model->{$model->getKeyName()} = Str::uuid();
             }
         });
+    }
+
+    // Практика 8 - Задание 8
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Практика 8 - Задание 9
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'order_product', 'order_id', 'product_id')
+            ->withPivot('quantity', 'price')
+            ->withTimestamps();
     }
 }

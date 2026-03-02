@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Практика 6 - Задание 7: создание таблицы users1
 return new class extends Migration
 {
     /**
