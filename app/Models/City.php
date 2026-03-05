@@ -12,11 +12,18 @@ class City extends Model
 
     protected $fillable = [
         'name',
+        'country_id',
     ];
 
     // Практика 8 - Задание 4
     public function users()
     {
         return $this->hasMany(User::class, 'cities_id');
+    }
+
+    // Практика 8 - Задание 18-20
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

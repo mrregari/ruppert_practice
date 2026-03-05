@@ -21,6 +21,11 @@ class User extends Model
         'salary',
         'is_admin',
         'cities_id',
+        'login',
+        'password',
+        'name',
+        'city_id',
+        'position_id',
     ];
 
     protected $casts = [
@@ -44,5 +49,29 @@ class User extends Model
     public function city()
     {
         return $this->belongsTo(City::class, 'cities_id');
+    }
+
+    // Практика 8 - Задание 3 (profile)
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // Практика 8 - Задание 24 (country через city)
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'city_id');
+    }
+
+    // Практика 8 - Задание 24 (position)
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    // Практика 8 - Задание 26-28 (roles)
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
     }
 }

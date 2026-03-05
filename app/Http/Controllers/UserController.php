@@ -9,6 +9,9 @@ use App\Models\City;
 use App\Models\Product;
 use App\Models\Article;
 use App\Models\Order;
+use App\Models\Profile;
+use App\Models\Role;
+use App\Models\Position;
 
 class UserController extends Controller
 {
@@ -256,83 +259,59 @@ class UserController extends Controller
         return view('task7.index', compact('result'));
     }
 
-    // Практика 8 - Задание 1
-    public function userArticles()
+    // Практика 8 - Связи в моделях
+    
+    public function show()
     {
-        $result = [];
-        $user = User::with('articles')->find(1);
-        $result['user'] = $user;
-        $result['articles'] = $user?->articles;
-        return view('task8.index', compact('result'));
+        // Задание 3-4
+        $taskNumber = '3-4';
+        $user = User::find(1);
+        $profileName = $user?->profile?->name ?? 'Не указано';
+        
+        return view('task8.show', compact('taskNumber', 'profileName'));
     }
 
-    // Практика 8 - Задание 3
-    public function userCity()
+    public function table()
     {
-        $result = [];
-        $user = User::with('city')->find(1);
-        $result['user'] = $user;
-        $result['city'] = $user?->city;
-        return view('task8.index', compact('result'));
+        // Задание 5
+        $taskNumber = '5';
+        $users = User::all();
+        return view('task8.table', compact('taskNumber', 'users'));
     }
 
-    // Практика 8 - Задание 4
-    public function cityUsers()
+    public function tableProfile()
     {
-        $result = [];
-        $city = City::with('users')->find(1);
-        $result['city'] = $city;
-        $result['users'] = $city?->users;
-        return view('task8.index', compact('result'));
+        // Задание 6-8
+        $taskNumber = '6-8';
+        $profiles = Profile::all();
+        return view('task8.tableProfile', compact('taskNumber', 'profiles'));
     }
 
-    // Практика 8 - Задание 5
-    public function articleUser()
+    public function task24()
     {
+        // Задание 24
+        $user = User::find(1);
         $result = [];
-        $article = Article::with('user')->find(1);
-        $result['article'] = $article;
-        $result['user'] = $article?->user;
-        return view('task8.index', compact('result'));
+        $result['user_name'] = $user?->name;
+        $result['city_name'] = $user?->city?->name;
+        $result['position_name'] = $user?->position?->name;
+        
+        return view('task8.show', compact('result'));
     }
 
-    // Практика 8 - Задание 6
-    public function orderProducts()
+    public function belongsToMany()
     {
-        $result = [];
-        $order = Order::with('products')->first();
-        $result['order'] = $order;
-        $result['products'] = $order?->products;
-        return view('task8.index', compact('result'));
+        // Задание 26-28
+        $users = User::with('roles')->get();
+        $roles = Role::with('users')->get();
+        
+        return view('task8.show', compact('users', 'roles'));
     }
 
-    // Практика 8 - Задание 7
-    public function productWarehouses()
+    public function task29()
     {
-        $result = [];
-        $product = Product::with('warehouses')->find(1);
-        $result['product'] = $product;
-        $result['warehouses'] = $product?->warehouses;
-        return view('task8.index', compact('result'));
-    }
-
-    // Практика 8 - Задание 8
-    public function orderUser()
-    {
-        $result = [];
-        $order = Order::with('user')->first();
-        $result['order'] = $order;
-        $result['user'] = $order?->user;
-        return view('task8.index', compact('result'));
-    }
-
-    // Практика 8 - Задание 9
-    public function productOrders()
-    {
-        $result = [];
-        $product = Product::with('orders')->find(1);
-        $result['product'] = $product;
-        $result['orders'] = $product?->orders;
-        return view('task8.index', compact('result'));
+        // Задание 29
+        $users = User::with(['city', 'position'])->get();
+        return view('task8.show', compact('users'));
     }
 }
