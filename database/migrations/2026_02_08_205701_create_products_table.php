@@ -4,12 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Практика 7 - Задание 2
 return new class extends Migration
 {
-    /**
-    Дополнительное Задание 2
-     */
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {

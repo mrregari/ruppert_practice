@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-// Практика 7 - Задание 4
 return new class extends Migration
 {
     /**
-    Дополнительное Задание 4
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('promotions', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->date('start_date');
-            $table->date('end_date')->nullable();
-            $table->integer('clicks')->default(0);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->integer('age');
+            $table->integer('salary');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('promotions');
+        Schema::dropIfExists('users');
     }
 };
