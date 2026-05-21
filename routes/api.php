@@ -1,19 +1,32 @@
 <?php
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{AuthController, BusController, RouteController, TripController, UserController};
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Гость
+Route::get('/bus', [BusController::class, 'index']);
+Route::get('/bus/{id}', [BusController::class, 'show']);
+Route::get('/route', [RouteController::class, 'index']);
+Route::get('/route/{id}', [RouteController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Авторизация
+Route::post('/login', [AuthController::class, 'login']);
+
+// Диспетчер + Админ
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/bus', [BusController::class, 'store']);
+    
+    Route::post('/route', [RouteController::class, 'store']);
+    Route::put('/route', [RouteController::class, 'update']);
+    Route::delete('/route', [RouteController::class, 'destroy']);
+    
+    Route::post('/trip', [TripController::class, 'store']);
+    Route::put('/trip', [TripController::class, 'update']);
+    Route::delete('/trip', [TripController::class, 'destroy']);
+});
+
+// Только админ
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+    Route::delete('/user', [UserController::class, 'destroy']);
+    Route::put('/password', [UserController::class, 'changePassword']);
 });

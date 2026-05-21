@@ -1,0 +1,22 @@
+<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('routes', function (Blueprint $table) {
+            $table->id();
+            $table->string('number_route', 10)->unique();
+            $table->string('start_stop');
+            $table->string('end_stop');
+            $table->integer('price');
+            $table->timestamps();
+        });
+    }
+    public function down(): void 
+    {
+        Schema::dropIfExists('routes');
+    }
+};

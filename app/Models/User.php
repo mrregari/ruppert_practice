@@ -10,15 +10,20 @@ class User extends Model
 {
     use HasFactory;
     protected $table = 'users';
-    protected $fillable = ['name', 'email', 'age', 'salary'];
+    protected $fillable = ['name', 'email', 'password', 'status'];
+    protected $hidden = ['password', 'remember_token'];
 
-    public function posts(): HasMany
+    public function hasRole(string $role): bool
     {
-        return $this->hasMany(Post::class);
+        return $this->status === $role;
     }
+    // public function posts(): HasMany
+    // {
+    //     return $this->hasMany(Post::class);
+    // }
 
-     public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
+    //  public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
 }
